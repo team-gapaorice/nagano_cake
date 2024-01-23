@@ -1,0 +1,2 @@
+class DeliveryDestination < ApplicationRecord
+end
