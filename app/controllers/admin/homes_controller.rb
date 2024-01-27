@@ -1,3 +1,6 @@
 class Admin::HomesController < ApplicationController
-  bofore_action :authenticate_admin!
+  before_action :authenticate_admin!
+
+  def top
+  end
 end
