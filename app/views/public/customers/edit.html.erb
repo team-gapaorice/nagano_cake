@@ -1,0 +1,29 @@
+<div class="mx-5 py-5">
+  <h1>編集画面</h1>
+  <div class="mx-5 py-5">
+    <%= form_with model: @customer, url: customers_mypage_path do |f| %>
+
+      <%= f.label :first_name, '氏名', for: 'first_name' %>
+      <%= f.text_field :last_name, id: 'last_name' %>
+      <%= f.text_field :first_name, id: 'first_name' %>
+      <br>
+      <%= f.label :first_name_kana, 'フリガナ', for: 'first_name' %>
+      <%= f.text_field :last_name_kana, id: 'last_name_kana' %>
+      <%= f.text_field :first_name_kana, id: 'first_name_kana' %>
+      <br>
+      <%= f.label :postal_code, '郵便番号' %>
+      <%= f.text_field :postal_code %>
+      <br>
+      <%= f.label :adress, '住所' %>
+      <%= f.text_field :adress %>
+      <br>
+      <%= f.label :telephone_number, '電話番号' %>
+      <%= f.text_field :telephone_number %>
+      <br>
+      <%= f.label :email, 'メールアドレス' %>
+      <%= f.text_field :email %>
+      <br>
+      <%= f.submit "変更内容を保存" %>
+    <% end %>
+  </div>
+</div>
