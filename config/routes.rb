@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     patch 'customers/mypage' => 'customers#update'
     get 'customers/mypage/edit' => 'customers#edit'
     get 'customers/confirm' => 'customers#confirm'
-    get 'customers/withdrawal' => 'customers#withdrawal'
+    patch 'customers/withdrawal' => 'customers#withdrawal'
 
     resources :delivery_destinations, except: [:new, :show]
 

@@ -2,7 +2,6 @@
   <h1>編集画面</h1>
   <div class="mx-5 py-5">
     <%= form_with model: @customer, url: customers_mypage_path do |f| %>
-
       <%= f.label :first_name, '氏名', for: 'first_name' %>
       <%= f.text_field :last_name, id: 'last_name' %>
       <%= f.text_field :first_name, id: 'first_name' %>
@@ -25,5 +24,6 @@
       <br>
       <%= f.submit "変更内容を保存" %>
     <% end %>
+    <%= link_to "退会する", customers_confirm_path %>
   </div>
 </div>
