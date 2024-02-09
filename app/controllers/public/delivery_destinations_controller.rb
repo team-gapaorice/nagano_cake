@@ -2,7 +2,7 @@ class Public::DeliveryDestinationsController < ApplicationController
   before_action :authenticate_customer!
 
   def index
-    @delivery_destinations = current_customer.delivery_destination.page(params[:page]).per(3)
+    @delivery_destinations = current_customer.delivery_destinations.page(params[:page]).per(3)
     @delivery_destination = DeliveryDestination.new
   end
 

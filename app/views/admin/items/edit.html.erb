@@ -1,0 +1,12 @@
+<div class="mx-5 py-5">
+  <h1>商品編集</h1>
+    <%= form_with model: @item, url: admin_item_path, method: :patch do |f| %>
+      商品画像  <%= f.file_field :image, accept: "image/*" %><br>
+      商品名  <%= f.text_field :name %><br>
+      商品説明  <%= f.text_area :introduction %><br>
+      ジャンル  <%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name) %><br>
+      税抜価格  <%= f.number_field :tax_excluded_price, step: 1, style: '-webkit-appearance: none;' %>円<br>
+      販売ステータス <%= f.radio_button :is_active, "true" %><%= f.label :is_active, "販売中" %><%= f.radio_button :is_active, "false" %><%= f.label :is_active, "販売停止中" %><br>
+      <%= f.submit '変更を保存' %>
+    <% end %>
+</div>

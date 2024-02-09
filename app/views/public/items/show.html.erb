@@ -1,0 +1,17 @@
+<div class="mx-5 py-5">
+  <div class="row">
+    <div class="col-lg-3">
+      <%= image_tag @item.get_image,size: "150x150" %>
+    </div>
+    <div class="col-lg-6">
+        <h4><%= @item.name %></h4><br>
+        <h4><%= @item.introduction %></h4><br>
+        <h4>¥<%= number_with_delimiter(@item.tax_included_price) %>（税込）</h4><br>
+        <%= form_with model: @cart_item, url: cart_items_path do |f| %>
+        <%= f.hidden_field :item_id, value: @item.id %>
+        <%= f.select :amount, *[1..10] %>
+        <%= f.submit "カートに追加" %>
+        <% end %>
+    </div>
+  </div>
+</div>

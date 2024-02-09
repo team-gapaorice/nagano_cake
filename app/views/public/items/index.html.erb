@@ -1,1 +1,39 @@
-<h1>商品一覧</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3">
+
+    <% if params[:genre_id].present? %>
+      <h3>ジャンル検索</h3>
+    <% else %>
+      <h3>商品一覧</h3>
+    <% end %>
+
+      <ul>
+        <% @genres.each do |genre| %>
+          <li>
+            <%= link_to genre.name, items_path(genre_id: genre.id) %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="col-lg-9">
+      <% @items.each_slice(4) do |items_slice| %>
+          <div class="row">
+            <% items_slice.each do |item| %>
+              <div class="col-lg-3">
+                <%= link_to item_path(item.id) do %>
+                  <%= image_tag item.get_image,size: "150x150" %>
+                <% end %>
+                <p>商品名：<%= item.name %></p>
+                <p>¥：<%= number_with_delimiter(item.tax_included_price) %></p>
+              </div>
+            <% end %>
+        </div>
+      <% end %>
+    <%= paginate @items %>
+    </div>
+  </div>
+</div>
+
+

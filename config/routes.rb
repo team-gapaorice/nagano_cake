@@ -22,8 +22,9 @@ Rails.application.routes.draw do
 
     resources :delivery_destinations, except: [:new, :show]
 
+    delete 'cart_items/destroy_all' => 'cart_items#destroy_all'
     resources :cart_items, only: [:index, :destroy, :create,:update]
-    get 'cart_items/destroy_all' => 'cart_items#destroy_all'
+
 
     resources :orders, only: [:new, :create, :index, :show]
     get 'order/confirm' => 'orders#confirm'
