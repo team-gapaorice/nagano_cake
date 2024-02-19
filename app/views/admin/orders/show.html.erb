@@ -1,0 +1,83 @@
+<div class="container p-3">
+  <div class="row">
+    <h3>注文履歴詳細</h3>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <table>
+        <tr>
+          <th>購入者</th>
+          <td>
+            <%= link_to admin_top_path do %>
+              <%= @order.customer.last_name %><%= @order.customer.first_name %>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <th>注文日</th><td><%= @order.created_at.strftime("%Y/%m/%d") %></td>
+        </tr>
+        <tr>
+          <th>配送先</th><td><%= @order.postal_code %><%= @order.adress %><br><%= @order.name %></td>
+        </tr>
+        <tr>
+          <th>支払い方法</th><td><%= @order.payment_method_i18n %></td>
+        </tr>
+        <tr>
+          <th>注文ステータス</th>
+          <td>
+            <%= form_with model: @order, url: admin_order_path,method: :patch do |f| %>
+              <%= f.select :status, Order.statuses_i18n.invert %>
+              <%= f.submit "更新",class:"btn btn-success" %>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-lg-10">
+      <table>
+        <tr>
+          <th>商品名</th>
+          <th>単価（税込）</th>
+          <th>数量</th>
+          <th>小計</th>
+          <th>制作ステータス</th>
+        </tr>
+        <% total = 0 %>
+        <% @order_details.each do |order_detail| %>
+          <tr>
+          <td><%= order_detail.item.name %></td>
+          <td><%= order_detail.tax_included_price %></td>
+          <td><%= order_detail.amount %></td>
+          <td><%= number_with_delimiter(order_detail.tax_included_price * order_detail.amount) %></td>
+          <td>
+            <%= form_with model: order_detail, url: admin_order_detail_path(order_detail) do |f| %>
+              <%= f.select :production_status, OrderDetail.production_statuses_i18n.invert%>
+              <%= f.submit "更新",class:"btn btn-success" %>
+            <% end %>
+          </td>
+          </tr>
+        <% total += order_detail.subtotal %>
+        <% end %>
+      </table>
+    </div>
+
+
+    <div class="col-lg-2">
+      <table>
+        <tr>
+          <th>商品合計</th><td><%= number_with_delimiter(total) %>円</td>
+        </tr>
+        <tr>
+          <th>送料</th><td><%= @order.postage %>円</td>
+        </tr>
+        <tr>
+          <th>請求金額合計</th><td><%= number_with_delimiter(total + @order.postage) %>円</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

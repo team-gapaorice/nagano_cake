@@ -23,7 +23,6 @@ class Public::CartItemsController < ApplicationController
 
   def index
     @cart_items = current_customer.cart_items
-    @total_price = @cart_items.sum(&:subtotal)
   end
 
   def update

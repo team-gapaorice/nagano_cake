@@ -1,39 +1,45 @@
-<div class="container">
-  <div class="row">
-    <div class="col-lg-3">
+<div class="mx-5 py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 mx-4">
 
-    <% if params[:genre_id].present? %>
-      <h3>ジャンル検索</h3>
-    <% else %>
-      <h3>商品一覧</h3>
-    <% end %>
-
-      <ul>
-        <% @genres.each do |genre| %>
-          <li>
-            <%= link_to genre.name, items_path(genre_id: genre.id) %>
+        <ul class="list-group border border-dark">
+          <li class="list-group-item border-secondary border-bottom">
+            <h3>ジャンル検索</h3>
           </li>
-        <% end %>
-      </ul>
-    </div>
+          <li class="list-group-item border-secondary border-bottom">
+          <% @genres.each do |genre| %>
+              <h4>
+                <%= link_to genre.name, items_path(genre_id: genre.id) %>
+              </h4>
+          <% end %>
+          </li>
+        </ul>
+      </div>
 
-    <div class="col-lg-9">
-      <% @items.each_slice(4) do |items_slice| %>
-          <div class="row">
-            <% items_slice.each do |item| %>
-              <div class="col-lg-3">
-                <%= link_to item_path(item.id) do %>
-                  <%= image_tag item.get_image,size: "150x150" %>
-                <% end %>
-                <p>商品名：<%= item.name %></p>
-                <p>¥：<%= number_with_delimiter(item.tax_included_price) %></p>
-              </div>
-            <% end %>
-        </div>
+      <div class="col-lg-8">
+        <% if params[:genre_id].present? %>
+        <h3>ジャンル検索</h3>
+      <% else %>
+        <h3>
+          商品一覧 全<%= @counts %>
+        </h3>
       <% end %>
-    <%= paginate @items %>
+        <% @items.each_slice(4) do |items_slice| %>
+            <div class="row">
+              <% items_slice.each do |item| %>
+                <div class="col-lg-3">
+                  <%= link_to item_path(item.id) do %>
+                    <%= image_tag item.get_image,size: "150x150" %>
+                  <p><%= item.name %></p>
+                  <% end %>
+                  <p>¥：<%= number_with_delimiter(item.tax_included_price) %></p>
+                </div>
+              <% end %>
+          </div>
+        <% end %>
+      <%= paginate @items %>
+      </div>
     </div>
   </div>
 </div>
-
-

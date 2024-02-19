@@ -11,10 +11,12 @@ class Public::ItemsController < ApplicationController
       @items = @genre.items.page(params[:page])
     else
       @items = Item.page(params[:page])
+      @counts = Item.count
     end
   end
 
   def show
+    @genres = Genre.all
     @item = Item.find(params[:id])
     @cart_item = CartItem.new
   end

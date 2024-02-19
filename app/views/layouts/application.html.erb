@@ -13,7 +13,7 @@
   <body>
     <header>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="<%= about_path %>">
+        <a class="navbar-brand" href="<%= top_path %>">
           <button type="button" class="btn btn-outline-dark">
             <h1>LOGO</h1>
           </button>
@@ -111,16 +111,18 @@
                 <a class="nav-link" href="<%= new_customer_session_path %>">ログイン <span class="sr-only">(current)</span></a>
                 </button>
               </li>
+              <%= form_with url: items_path, method: :get, class: "form-inline my-2 my-lg-0" do |f| %>
+                <%= f.text_field :items_name, class: "form-control mr-sm-2" %>
+                <%= f.submit "検索", class: "btn btn-outline-success my-2 my-sm-0" %>
+            <% end %>
             <% end %>
           </ul>
         </div>
       </nav>
     </header>
-
     <%= yield %>
     <footer class="footer">
-      <div class="container">
-      </div>
+      <nav class="border-top fixed-bottom pt-5 pb-5 "></nav>
     </footer>
   </body>
 </html>

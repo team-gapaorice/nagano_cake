@@ -1,6 +1,20 @@
 <div class="mx-5 py-5">
   <div class="row">
-    <div class="col-lg-3">
+    <div class="col-lg-2 mx-1">
+        <ul class="list-group border border-dark">
+          <li class="list-group-item border-secondary border-bottom">
+            <h3>ジャンル検索</h3>
+          </li>
+          <li class="list-group-item border-secondary border-bottom">
+          <% @genres.each do |genre| %>
+              <h4>
+                <%= link_to genre.name, items_path(genre_id: genre.id) %>
+              </h4>
+          <% end %>
+          </li>
+        </ul>
+      </div>
+    <div class="col-lg-1">
       <%= image_tag @item.get_image,size: "150x150" %>
     </div>
     <div class="col-lg-6">
@@ -9,8 +23,8 @@
         <h4>¥<%= number_with_delimiter(@item.tax_included_price) %>（税込）</h4><br>
         <%= form_with model: @cart_item, url: cart_items_path do |f| %>
         <%= f.hidden_field :item_id, value: @item.id %>
-        <%= f.select :amount, *[1..10] %>
-        <%= f.submit "カートに追加" %>
+        <%= f.select :amount, *[1..10], { include_blank: '個数選択'} %>
+        <%= f.submit "カートに入れる",class:"btn btn-success" %>
         <% end %>
     </div>
   </div>

@@ -26,8 +26,9 @@ Rails.application.routes.draw do
     resources :cart_items, only: [:index, :destroy, :create,:update]
 
 
+
     resources :orders, only: [:new, :create, :index, :show]
-    get 'order/confirm' => 'orders#confirm'
+    post 'order/confirm' => 'orders#confirm'
     get 'order/thanks' => 'orders#thanks'
   end
 
@@ -40,7 +41,7 @@ Rails.application.routes.draw do
 
     resources :customers, except: [:new, :create, :destroy]
 
-    resources :oder, only: [:show, :update]
+    resources :orders, only: [:index,:show, :update]
 
     resources :order_details, only: [:update]
   end
