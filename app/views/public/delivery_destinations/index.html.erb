@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="row pt-2">
+    <div><%= flash[:notice] %></div>
+  </div>
+  <div class="row py-5">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-3 bg-light">
+      <h2>配送先登録/一覧</h2>
+    </div>
+  </div>
+  <%= form_with model: @delivery_destination,url: delivery_destinations_path, method: :post do |f| %>
+    <div class="row">
+      <div class="col-lg-3  mb-3">
+        <%= f.label :"郵便番号（ハイフンなし）" %>
+      </div>
+      <div class="col-lg-5 mb-3">
+        <%= f.text_field :postal_code,class:"form-control" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 mb-3">
+        <%= f.label :"住所" %>
+      </div>
+      <div class="col-lg-8 mb-3">
+        <%= f.text_field :adress,class:"form-control" %>
+      </div>
+      <div class="col-lg-3 mb-3">
+        <%= f.label :"宛名" %>
+      </div>
+      <div class="col-lg-5 mb-3">
+      <%= f.text_field :name,class:"form-control" %>
+      </div>
+      <div class="col-lg-2 mb-3">
+        <%= f.submit'新規登録',class:"btn btn-success"%>
+      </div>
+    </div>
+  <% end %>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th style="width: 50px">郵便番号</th>
+        <th style="width: 200px">住所</th>
+        <th style="width: 100px">宛名</th>
+        <th style="width: 100px"></th>
+      </tr>
+      <% if @delivery_destinations.present? %>
+        <% @delivery_destinations.each do |delivery_destination| %>
+          <tr>
+            <td><%= delivery_destination.postal_code %></td><br>
+            <td><%= delivery_destination.adress %></td>
+            <td><%= delivery_destination.name %></td>
+            <td><%= link_to "編集する", edit_delivery_destination_path(delivery_destination.id),class:"btn btn-danger" %>  <%= link_to "削除する", delivery_destination_path(delivery_destination.id),class:"btn btn-success", method: :delete %></td>
+          </tr>
+        <% end %>
+        <% else %>
+          <p>登録されている配送先がありません。</p>
+      <% end %>
+    </thead>
+  </table>
+  <%= paginate @delivery_destinations %>
+</div>
