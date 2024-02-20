@@ -1,0 +1,29 @@
+<div class="mx-5 py-5">
+  <h1>商品一覧</h1>
+  <%= link_to "新規作成", new_admin_item_path %>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th class="w-15">商品ID</th>
+        <th class="w-15">商品名</th>
+        <th class="w-15">税抜価格</th>
+        <th class="w-15">ジャンル</th>
+        <th class="w-15">ステータス</th>
+      </tr>
+      <% if @items.present? %>
+        <% @items.each do |item| %>
+          <tr>
+            <td><%= item.id %></td>
+            <td><%= link_to "#{item.name}", admin_item_path(item) %></td>
+            <td><%= number_with_delimiter(item.tax_excluded_price) %></td>
+            <td><%= item.genre.name %></td>
+            <td><%= item.is_active ? '販売中' : '販売停止中' %></td>
+          </tr>
+        <% end %>
+        <% else %>
+          <p>登録されている商品がありません。</p>
+      <% end %>
+    </thead>
+  </table>
+  <%= paginate @items %>
+</div>
