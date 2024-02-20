@@ -2,43 +2,41 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-3 mx-4">
-
         <ul class="list-group border border-dark">
           <li class="list-group-item border-secondary border-bottom">
             <h3>ジャンル検索</h3>
           </li>
           <li class="list-group-item border-secondary border-bottom">
-          <% @genres.each do |genre| %>
+            <% @genres.each do |genre| %>
               <h4>
                 <%= link_to genre.name, items_path(genre_id: genre.id) %>
               </h4>
-          <% end %>
+            <% end %>
           </li>
         </ul>
       </div>
-
       <div class="col-lg-8">
         <% if params[:genre_id].present? %>
-        <h3>ジャンル検索</h3>
-      <% else %>
-        <h3>
-          商品一覧 全<%= @counts %>
-        </h3>
-      <% end %>
+          <h3>ジャンル検索</h3>
+        <% else %>
+          <h3>
+            商品一覧 全<%= @counts %>
+          </h3>
+        <% end %>
         <% @items.each_slice(4) do |items_slice| %>
-            <div class="row">
-              <% items_slice.each do |item| %>
-                <div class="col-lg-3">
-                  <%= link_to item_path(item.id) do %>
-                    <%= image_tag item.get_image,size: "150x150" %>
+          <div class="row">
+            <% items_slice.each do |item| %>
+              <div class="col-lg-3">
+                <%= link_to item_path(item.id) do %>
+                  <%= image_tag item.get_image,size: "150x150" %>
                   <p><%= item.name %></p>
-                  <% end %>
-                  <p>¥：<%= number_with_delimiter(item.tax_included_price) %></p>
-                </div>
-              <% end %>
+                <% end %>
+                <p>¥：<%= number_with_delimiter(item.tax_included_price) %></p>
+              </div>
+            <% end %>
           </div>
         <% end %>
-      <%= paginate @items %>
+        <%= paginate @items %>
       </div>
     </div>
   </div>

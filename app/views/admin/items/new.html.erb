@@ -1,7 +1,6 @@
 <div class="mx-5 py-5">
   <h2>商品新規登録</h2>
-
-<div class="mx-5 py-5">
+  <div class="mx-5 py-5">
     <%= form_with model: @item, url: admin_items_path, method: :post do |f| %>
       商品画像  <%= f.file_field :image, accept: "image/*" %><br>
       商品名  <%= f.text_field :name %><br>
@@ -12,5 +11,5 @@
       <%= f.radio_button :is_active, "false" %><%= f.label :is_active, "販売停止中" %><br>
       <%= f.submit '投稿' %>
     <% end %>
-    </div>
+  </div>
 </div>

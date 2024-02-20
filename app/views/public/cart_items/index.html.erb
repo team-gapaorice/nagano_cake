@@ -1,33 +1,38 @@
-<div class="mx-5 py-5">
-  <h2>ショッピングカート</h2>
-  <div>
-    <%= flash[:notice] %>
+<div class="container">
+  <div class="row pt-2">
+    <div><%= flash[:notice] %></div>
   </div>
-
-  <%= link_to 'カートを空にする', cart_items_destroy_all_path, method: :delete, data: { confirm: '本当に全削除しますか？' },class: "btn btn-danger" %>
-  <table>
-    <thead class = "border border-secondary">
-      <th class = "border border-secondary">商品名</th>
-      <th class = "border border-secondary">単価(税込)</th>
-      <th class = "border border-secondary">数量</th>
-      <th class = "border border-secondary">小計</th>
-      <th></th>
-    </thead>
-    <tbody>
-    <% @cart_items.each do |cart_item| %>
-      <tr class = "border border-secondary">
-        <td class = "border border-secondary"><%= image_tag cart_item.item.get_image, size: "100x100" %><%= cart_item.item.name %></td>
-        <td class = "border border-secondary"><%= number_with_delimiter(cart_item.item.tax_included_price) %></td>
-        <td class = "border border-secondary">
-          <%= form_with model: cart_item, url: cart_item_path(cart_item), method: :patch do |f| %>
-            <%= f.number_field :amount, min: 1, max:10 %>
-            <%= f.submit "変更",class: "btn btn-success" %>
-          <% end %>
-        <td class = "border border-secondary"><%= number_with_delimiter(cart_item.subtotal) %></td>
-        <td><%= link_to '削除', cart_item_path(cart_item), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger" %></td>
-        </td>
-      </tr>
-    <% end %>
+  <div class="row py-3">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-4 bg-light">
+      <h2>ショッピングカート</h2>
+    </div>
+  </div>
+  <div class="row pt-2">
+    <%= link_to 'カートを空にする', cart_items_destroy_all_path, method: :delete, data: { confirm: '本当に全削除しますか？' },class: "btn btn-danger" %>
+  </div>
+  <div class="row pt-2">
+    <table>
+      <thead class = "border border-secondary bg-light">
+        <th class = "border border-secondary">商品名</th>
+        <th class = "border border-secondary">単価(税込)</th>
+        <th class = "border border-secondary">数量</th>
+        <th class = "border border-secondary">小計</th>
+      </thead>
+      <% @cart_items.each do |cart_item| %>
+        <tr class = "border border-secondary">
+          <td class = "border border-secondary"><%= image_tag cart_item.item.get_image, size: "100x100" %><%= cart_item.item.name %></td>
+          <td class = "border border-secondary"><%= number_with_delimiter(cart_item.item.tax_included_price) %></td>
+          <td class = "border border-secondary">
+            <%= form_with model: cart_item, url: cart_item_path(cart_item), method: :patch do |f| %>
+              <%= f.number_field :amount, min: 1, max:10 %>
+              <%= f.submit "変更",class: "btn btn-success" %>
+            <% end %>
+          <td class = "border border-secondary"><%= number_with_delimiter(cart_item.subtotal) %></td>
+          <td><%= link_to '削除', cart_item_path(cart_item), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger" %></td>
+          </td>
+        </tr>
+      <% end %>
       <tr>
         <td></td>
         <td></td>
@@ -40,9 +45,10 @@
       <tr>
         <td><%= link_to '買い物を続ける', top_path,class: "btn btn-primary" %></td>
         <td></td>
-        <td><%= link_to '情報入力に進む',new_order_path,class: "btn btn-success" %></td>
+        <% if @cart_items.present? %>
+          <td><%= link_to '情報入力に進む',new_order_path,class: "btn btn-success" %></td>
+        <% end %>
       </tr>
-    </tbody>
-  </table>
-
+    </table>
+  </div>
 </div>

@@ -1,10 +1,6 @@
 class Admin::OrdersController < ApplicationController
   before_action :authenticate_admin!
 
-  def index
-
-  end
-
   def show
     @order = Order.find(params[:id])
     @order_details = @order.order_details
@@ -17,10 +13,7 @@ class Admin::OrdersController < ApplicationController
     if @order.status == "payment_confirmation"
       @order_details.update_all(production_status: "waiting_for_production")
     end
-
     redirect_to admin_order_path(@order)
-
-
   end
 
 

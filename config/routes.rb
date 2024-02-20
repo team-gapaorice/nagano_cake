@@ -40,8 +40,9 @@ Rails.application.routes.draw do
     resources :genres, except: [:new, :show, :destroy]
 
     resources :customers, except: [:new, :create, :destroy]
+    get 'customers/order/:id' => 'customers#orders', as: 'customer_orders'
 
-    resources :orders, only: [:index,:show, :update]
+    resources :orders, only: [:show, :update]
 
     resources :order_details, only: [:update]
   end

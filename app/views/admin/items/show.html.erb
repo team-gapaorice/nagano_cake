@@ -1,10 +1,10 @@
 <div class="mx-5 py-5">
   <h1>商品詳細</h1>
-  <%= image_tag @item.get_image %>
-  <p>商品名：<%= @item.name %></p>
-  <p>商品説明：<%= @item.introduction %></p>
-  <p>ジャンル：<%= @item.genre.name %></p>
-  <p>税込価格（税抜価格）：<%= number_with_delimiter(@item.tax_included_price) %>(<%= number_with_delimiter(@item.tax_excluded_price) %>)円</p>
-  <p>販売ステータス：<%= @item.is_active ? '販売中' : '販売停止中' %></p>
+  <%= image_tag @item.get_image, size: "200x200" %>
+    <p>商品名：<%= @item.name %></p>
+    <p>商品説明：<%= @item.introduction %></p>
+    <p>ジャンル：<%= @item.genre.name %></p>
+    <p>税込価格（税抜価格）：<%= number_with_delimiter(@item.tax_included_price) %>(<%= number_with_delimiter(@item.tax_excluded_price) %>)円</p>
+    <p>販売ステータス：<%= @item.is_active ? '販売中' : '販売停止中' %></p>
   <%= link_to "編集する", edit_admin_item_path(@item) %>
 </div>
