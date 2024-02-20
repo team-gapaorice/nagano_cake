@@ -17,8 +17,13 @@ Instagramがきっかけで全国から注文が来るようになった為、
 
 # ER図とテーブル定義書とアプリケーション詳細設計
 ・ER図
+
 　https://app.diagrams.net/#G1HyvMv45NRd4T88h3zoGUAlTJMN3He9Eq#%7B%22pageId%22%3A%22kxwToX5Zfg_nBOhcL2P8%22%7D
+ 
 ・テーブル定義書
+
 　https://docs.google.com/spreadsheets/d/11id-8djyWOJDwWLwNRoiR1pRJ-WjUbl1LM4wQFOVxTE/edit#gid=1041459116
+ 
 ・アプリケーション詳細設計
+
 　https://docs.google.com/spreadsheets/d/1iLkoRPxbAkAwOmWppNuhnSsp_T2qLqYXhvO7BLagsnU/edit#gid=549108681
